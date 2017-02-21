@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/RonanDrouglazet/synofb/issues"
   },
-  "homepage": "https://github.com/RonanDrouglazet/synofb#readme"
+  "homepage": "https://github.com/RonanDrouglazet/synofb#readme",
+  "dependencies": {
+    "watch": "^1.0.1"
+  }
 }
