@@ -63,7 +63,10 @@ app.get('/diff', (req, res) => {
                     var diff = complete.filter((node) => movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1)
 
                     var all = diff.map((value) => {
-                        return cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;').toString()
+                        return cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;')
+                                 .toString()
+                                 .replace('\t', '   ')
+                                 .replace('\n', '')
                     })
 
                     res.send(all)
