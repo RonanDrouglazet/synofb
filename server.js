@@ -47,7 +47,7 @@ watch.createMonitor('/volume1/homes/admin/complete', function (monitor) {
 })
 
 app.get('/diff', (req, res) => {
-    let movies, tvshows, animes, complete
+    var movies, tvshows, animes, complete
     iNo.list('/volume1/Movies', (inodes) => {
         movies = inodes
 
@@ -60,7 +60,7 @@ app.get('/diff', (req, res) => {
                 iNo.list('/volume1/homes/admin/complete', (inodes) => {
                     complete = inodes
 
-                    let diff = complete.filter((node) => movies.includes(node) || tvshows.includes(node) || animes.includes(node))
+                    var diff = complete.filter((node) => movies.includes(node) || tvshows.includes(node) || animes.includes(node))
 
                     res.send(diff)
                 })
