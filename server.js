@@ -28,7 +28,7 @@ function iNodes() {}
 iNodes.prototype.list = function(dir, done) {
     cp.exec(`ls -lRi ${dir} | grep -Eo "^[0-9]+ -"`, (err, out) => {
         test.ifError(err)
-        const array = out.split(' -\\n')
+        const array = out.split(/ \-\\n/g)
         done(array)
     })
 }
