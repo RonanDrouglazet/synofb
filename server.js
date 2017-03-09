@@ -60,7 +60,7 @@ app.get('/diff', (req, res) => {
                 iNo.list('/volume1/homes/admin/complete', (inodes) => {
                     complete = inodes
 
-                    var diff = complete.filter((node) => movies.indexOf(node) === -1 || tvshows.indexOf(node)  === -1 || animes.indexOf(node)  === -1)
+                    var diff = complete.filter((node) => movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1)
 
                     res.send(diff)
                 })
