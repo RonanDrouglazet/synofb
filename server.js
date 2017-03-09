@@ -46,9 +46,26 @@ watch.createMonitor('/volume1/homes/admin/complete', function (monitor) {
     })
 })
 
-app.get('/list', (req, res) => {
+app.get('/diff', (req, res) => {
+    let movies, tvshows, animes, complete
     iNo.list('/volume1/Movies', (inodes) => {
-        res.send(inodes)
+        movies = inodes
+
+        iNo.list('/volume1/TV\ Shows', (inodes) => {
+            tvshows = inodes
+
+            iNo.list('/volume1/Anime', (inodes) => {
+                animes = inodes
+
+                iNo.list('/volume1/homes/admin/complete', (inodes) => {
+                    complete = inodes
+
+                    let diff = complete.filter((node) => movies.includes(node) || tvshows.includes(node) || animes.includes(node))
+
+                    res.send(diff)
+                })
+            })
+        })
     })
 })
 
