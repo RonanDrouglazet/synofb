@@ -1,7 +1,8 @@
 var cp = require('child_process')
 var watch = require('watch')
 var test = require('assert')
-var app = require('express')()
+var express = require('express')
+var app = express()
 
 function filebot() {
     this.queue = 0
@@ -63,10 +64,12 @@ app.get('/diff', (req, res) => {
                     var diff = complete.filter((node) => movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1)
 
                     var all = diff.map((value) => {
-                        return cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;')
+                        return [value,
+                                 cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;')
                                  .toString()
                                  .replace('\t', '   ')
                                  .replace('\n', '')
+                               ]
                     })
 
                     res.send(all)
@@ -75,6 +78,8 @@ app.get('/diff', (req, res) => {
         })
     })
 })
+
+app.get('/', express.static('./static'))
 
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
