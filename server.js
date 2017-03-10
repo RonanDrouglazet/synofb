@@ -62,7 +62,11 @@ app.get('/diff', (req, res) => {
                     complete = inodes
 
                     var diff = complete.filter((node) => { return (movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1) })
-console.log(diff)
+                    var diff2 = complete
+                                .filter((node) => {return movies.indexOf(node) === -1})
+                                .filter((node) => {return tvshows.indexOf(node) === -1})
+                                .filter((node) => {return animes.indexOf(node) === -1})
+console.log(diff.length, diff2.length, complete.length)
                     var all = diff.map((value) => {
                         return [value,
                                  cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;')
