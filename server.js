@@ -52,14 +52,14 @@ app.get('/diff', (req, res) => {
     iNo.list('/volume1/Movies', (inodes) => {
         movies = inodes
 
-        iNo.list('/volume1/TV\\ Shows', (inodes) => {
-            tvshows = inodes
+        iNo.list('/volume1/TV\\ Shows', (inodes1) => {
+            tvshows = inodes1
 
-            iNo.list('/volume1/Anime', (inodes) => {
-                animes = inodes
+            iNo.list('/volume1/Anime', (inodes2) => {
+                animes = inodes2
 
-                iNo.list('/volume1/homes/admin/complete', (inodes) => {
-                    complete = inodes
+                iNo.list('/volume1/homes/admin/complete', (inodes3) => {
+                    complete = inodes3
 
                     var diff = complete.filter((node) => { return (movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1) })
                     var diff2 = complete
