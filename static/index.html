@@ -9,9 +9,30 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.0/semantic.min.js"></script>
 </head>
 <body style="overflow-x:auto">
+    <button class="ui red button">
+        Remove
+    </button>
     <script type="text/javascript">
+
+        var template = `
+            <div class="ui slider checkbox">
+                <input type="checkbox" name="{INUM}">
+                <label>{NAME}</label>
+            </div>
+        `;
+
         $.get('/diff', (data) => {
-            console.log(data)
+            data.forEach(function(node) {
+                $(document).append(
+                    template
+                        .replace('{INUM}', node[0])
+                        .replace('{NAME}', node[1])
+                )
+            })
+        })
+
+        $('.ui.red.button').click(() => {
+
         })
     </script>
 </body>
