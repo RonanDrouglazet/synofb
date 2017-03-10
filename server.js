@@ -54,15 +54,15 @@ app.get('/diff', (req, res) => {
 
         iNo.list('/volume1/TV\\ Shows', (inodes) => {
             tvshows = inodes
-            console.log(tvshows)
+
             iNo.list('/volume1/Anime', (inodes) => {
                 animes = inodes
 
                 iNo.list('/volume1/homes/admin/complete', (inodes) => {
                     complete = inodes
 
-                    var diff = complete.filter((node) => movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1)
-
+                    var diff = complete.filter((node) => { return (movies.indexOf(node) === -1 && tvshows.indexOf(node)  === -1 && animes.indexOf(node)  === -1) })
+console.log(diff)
                     var all = diff.map((value) => {
                         return [value,
                                  cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;')
