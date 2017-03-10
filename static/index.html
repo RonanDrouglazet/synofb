@@ -12,6 +12,7 @@
     <button class="ui red button">
         Remove
     </button>
+    <i class="massive notched circle loading icon"></i>
     <script type="text/javascript">
 
         var template = `
@@ -22,8 +23,9 @@
         `;
 
         $.get('/diff', (data) => {
+            $('i.massive').remove()
             data.forEach(function(node) {
-                $(document).append(
+                $(document.body).append(
                     template
                         .replace('{INUM}', node[0])
                         .replace('{NAME}', node[1])
