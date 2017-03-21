@@ -27,9 +27,9 @@ filebot.prototype.addToQueue = function () {
 function iNodes() {}
 
 iNodes.prototype.list = function(dir, done) {
-    cp.exec("ls -lRi " + dir + " | grep -Eo \"^[0-9]+ -\"", (err, out) => {
+    cp.exec("ls -lRi " + dir + " | grep -Eo \"^ *[0-9]+ -\"", (err, out) => {
         test.ifError(err)
-        const array = out.split(/ \-\n/g).filter((value) => value !== "")
+        const array = out.split(/ \-\n/g).map((value) => value.trim()).filter((value) => value !== "")
         done(array)
     })
 }
@@ -54,7 +54,6 @@ app.get('/diff', (req, res) => {
 
         iNo.list('/volume1/TV\\ Shows', (inodes1) => {
             tvshows = inodes1
-            console.log(inodes1.length)
 
             iNo.list('/volume1/Anime', (inodes2) => {
                 animes = inodes2
@@ -67,7 +66,7 @@ app.get('/diff', (req, res) => {
                                 .filter((node) => {return movies.indexOf(node) === -1})
                                 .filter((node) => {return tvshows.indexOf(node) === -1})
                                 .filter((node) => {return animes.indexOf(node) === -1})
-console.log(diff.length, diff2.length, complete.length)
+
                     var all = diff.map((value) => {
                         return [value,
                                  cp.execSync('find /volume1/homes/admin/complete/ -inum ' + value + ' -exec du -h {} \\;')
@@ -75,7 +74,7 @@ console.log(diff.length, diff2.length, complete.length)
                                  .replace('\t', '   ')
                                  .replace('\n', '')
                                ]
-                    })
+                    }).filter((value) => !value[1].match("@eaDir"))
 
                     res.send(all)
                 })
