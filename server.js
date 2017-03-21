@@ -83,7 +83,7 @@ console.log(diff.length, diff2.length, complete.length)
     })
 })
 
-app.get('/', express.static('./static'))
+app.get('/', express.static('/volume1/homes/admin/dev/synofb/static'))
 
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
