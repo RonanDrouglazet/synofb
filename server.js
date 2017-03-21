@@ -27,7 +27,7 @@ filebot.prototype.addToQueue = function () {
 function iNodes() {}
 
 iNodes.prototype.list = function(dir, done) {
-    cp.exec(`ls -lRi ${dir} | grep -Eo "^[0-9]+ -"`, (err, out) => {
+    cp.exec("ls -lRi " + dir + " | grep -Eo \"^[0-9]+ -\"", (err, out) => {
         test.ifError(err)
         const array = out.split(/ \-\n/g).filter((value) => value !== "")
         done(array)
