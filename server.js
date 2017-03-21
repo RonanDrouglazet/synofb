@@ -52,8 +52,9 @@ app.get('/diff', (req, res) => {
     iNo.list('/volume1/Movies', (inodes) => {
         movies = inodes
 
-        iNo.list('/volume1/TV\ Shows', (inodes1) => {
+        iNo.list('/volume1/TV\\ Shows', (inodes1) => {
             tvshows = inodes1
+            console.log(inodes1.length)
 
             iNo.list('/volume1/Anime', (inodes2) => {
                 animes = inodes2
