@@ -2,6 +2,8 @@ var cp = require('child_process')
 var watch = require('watch')
 var test = require('assert')
 var express = require('express')
+var jsonParser = require('body-parser').json()
+var fs = require('fs')
 var app = express()
 
 function filebot() {
@@ -83,8 +85,17 @@ app.get('/diff', (req, res) => {
     })
 })
 
+app.post('/delete', jsonParser, (req, res) => {
+    test.ok(req.body)
+    test.ok(req.body.files)
+    req.body.files.forEach(function(file) {
+        console.log('remove file', file)
+        //fs.unlinkSync(file)
+    })
+})
+
 app.get('/', express.static('/volume1/homes/admin/dev/synofb/static'))
 
 app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+  console.log('synofb listening on port 3000!');
 })

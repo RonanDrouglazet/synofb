@@ -36,6 +36,11 @@
         })
 
         $('.ui.red.button').click(() => {
+            var filesToDelete = $('input[type=checkbox]')
+                .filter((i, elem) => $(elem).is(':checked'))
+                .map((i,elem) => $(elem).attr('name'))
+                .get()
+            console.log(filesToDelete)
 
         })
     </script>
