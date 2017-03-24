@@ -41,7 +41,7 @@
                 .map((i,elem) => $(elem).attr('name'))
                 .get()
             console.log(filesToDelete)
-
+            $.post('/delete', {files: filesToDelete}, () => location.reload())
         })
     </script>
 </body>

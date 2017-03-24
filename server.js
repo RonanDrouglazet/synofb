@@ -91,6 +91,7 @@ app.post('/delete', jsonParser, (req, res) => {
     req.body.files.forEach(function(file) {
         console.log('remove file', file)
         //fs.unlinkSync(file)
+        //cp.exec('find /volume1/homes/admin/complete -inum ' + file + ' -exec rm -i {} \\;')
     })
 })
 
